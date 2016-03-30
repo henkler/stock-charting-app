@@ -22,9 +22,6 @@ class Chart extends React.Component {
 
   setupChart() {
     Highcharts.stockChart('stock-chart', {
-      title: {
-        text: 'Stocks'
-      },
       xAxis: {
         type: 'datetime'
       },
