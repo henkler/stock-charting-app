@@ -4,26 +4,33 @@ import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import ContentAdd from 'material-ui/lib/svg-icons/content/add';
 
 const styles = {
-    button: {
-        marginLeft: 20
-    }
+  button: {
+    marginLeft: 20
+  }
 };
 
 const StockAdd = (props) => (
-    <h1>
-        <TextField
-            name="stock-input"
-            value={props.stockInput}
-            onChange={props.stockInputChanged}
-            hintText="Stock Symbol"
-        />
-        <FloatingActionButton
-            mini={true}
-            style={styles.button}
-            onClick={props.handleAddStockClick}>
-            <ContentAdd />
-        </FloatingActionButton>
-    </h1>
+  <h1>
+    <TextField
+      name="stock-input"
+      value={props.stockInput}
+      onChange={props.stockInputChanged}
+      hintText="Stock Symbol"
+    />
+    <FloatingActionButton
+      mini={true}
+      style={styles.button}
+      onClick={props.handleAddStockClick}
+    >
+      <ContentAdd />
+    </FloatingActionButton>
+  </h1>
 );
+
+StockAdd.propTypes = {
+  stockInput: React.PropTypes.string,
+  stockInputChanged: React.PropTypes.func,
+  handleAddStockClick: React.PropTypes.func
+};
 
 export default StockAdd;

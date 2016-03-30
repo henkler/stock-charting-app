@@ -5,41 +5,50 @@ import ActionDelete from 'material-ui/lib/svg-icons/action/delete';
 import StockAdd from './stockAdd.jsx';
 
 const styles = {
-    container: {
-        width: 350,
-        height: 90,
-        margin: 10,
-        textAlign: 'center',
-        display: 'inline-block'
-    },
-    button: {
-        marginLeft: 20
-    }
+  container: {
+    width: 350,
+    height: 90,
+    margin: 10,
+    textAlign: 'center',
+    display: 'inline-block'
+  },
+  button: {
+    marginLeft: 20
+  }
 };
 
 const StockList = ({ stocks, props }) => (
   <div>
     {stocks.map(stock =>
-      <Paper key={stock._id} style={styles.container} zDepth={4}>
+      <Paper key={ stock._id } style={ styles.container } zDepth={4}>
         <h1>{stock._id}
-        <FloatingActionButton
+          <FloatingActionButton
             mini={true}
             style={styles.button}
             secondary={true}
-            onClick={event => props.handleDeleteStockClick(stock._id)}>
+            onClick={ () => props.handleDeleteStockClick(stock._id) }
+          >
             <ActionDelete />
-        </FloatingActionButton>
+          </FloatingActionButton>
         </h1>
       </Paper>
     )}
-      <Paper style={styles.container} zDepth={4}>
+    <Paper style={styles.container} zDepth={4}>
       <StockAdd
-          handleAddStockClick={props.handleAddStockClick}
-          stockInput={props.stockInput}
-          stockInputChanged={props.stockInputChanged}
+        handleAddStockClick={props.handleAddStockClick}
+        stockInput={props.stockInput}
+        stockInputChanged={props.stockInputChanged}
       />
-          </Paper>
+    </Paper>
   </div>
 );
+
+StockList.propTypes = {
+  stocks: React.PropTypes.array,
+  stockInput: React.PropTypes.string,
+  stockInputChanged: React.PropTypes.func,
+  handleAddStockClick: React.PropTypes.func,
+  handleDeleteStockClick: React.PropTypes.func
+};
 
 export default StockList;

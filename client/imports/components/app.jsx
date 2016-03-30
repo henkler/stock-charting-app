@@ -1,60 +1,57 @@
 import React from 'react';
 import AppBar from 'material-ui/lib/app-bar';
 import StockList from '../containers/stockList';
-import Chart from './chart.jsx';
+import Chart from '../containers/chart';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            stockInput: null,
-            stockData: []
-        }
-    }
-    componentDidMount() {
-        this.loadStockData();
-    }
-    loadStockData() {
-        Meteor.call('getStockData', (error, result) => {
-            this.setState({ stockData: result });
-        });
-    }
-    handleAddStockClick() {
-        Meteor.call('addStock', this.state.stockInput);
-        this.setState({ stockInput: null });
-        this.loadStockData();
-    }
-    handleDeleteStockClick(stockId) {
-        Meteor.call('deleteStock', stockId);
-        this.loadStockData();
-    }
-    stockInputChanged(event) {
-        let stockInput = event.target.value;
+    this.handleAddStockClick = this.handleAddStockClick.bind(this);
+    this.handleDeleteStockClick = this.handleDeleteStockClick.bind(this);
+    this.stockInputChanged = this.stockInputChanged.bind(this);
 
-        if(!stockInput) {
-            stockInput = null;
-        }
+    this.state = {
+      stockInput: null
+    };
+  }
 
-        this.setState({ stockInput });
+  handleAddStockClick() {
+    Meteor.call('addStock', this.state.stockInput);
+    this.setState({ stockInput: null });
+  }
+
+  handleDeleteStockClick(stockId) {
+    Meteor.call('deleteStock', stockId);
+  }
+
+  stockInputChanged(event) {
+    let stockInput = event.target.value.toUpperCase();
+
+    if (!stockInput) {
+      stockInput = null;
     }
-    render() {
-        return (
-            <div>
-                <AppBar
-                    title="Stock Charting App"
-                    zDepth={4}
-                />
-                <Chart stockData={this.state.stockData} />
-                <StockList
-                    handleAddStockClick={this.handleAddStockClick.bind(this)}
-                    handleDeleteStockClick={this.handleDeleteStockClick.bind(this)}
-                    stockInput={this.state.stockInput}
-                    stockInputChanged={this.stockInputChanged.bind(this)}
-                    />
-            </div>
-        );
-    }
+
+    this.setState({ stockInput });
+  }
+
+  render() {
+    return (
+      <div>
+        <AppBar
+          title="Stock Charting App"
+          zDepth={4}
+        />
+        <Chart />
+        <StockList
+          handleAddStockClick={ this.handleAddStockClick }
+          handleDeleteStockClick={ this.handleDeleteStockClick }
+          stockInput={ this.state.stockInput }
+          stockInputChanged={ this.stockInputChanged }
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
