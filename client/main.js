@@ -1,4 +1,5 @@
-import React from 'react';
+/* global Meteor: false*/
+import React from 'react'; // eslint-disable-line no-unused-vars
 import { mount } from 'react-mounter';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
