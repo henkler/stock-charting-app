@@ -1,5 +1,11 @@
 import React from 'react';
+import Paper from 'material-ui/lib/paper';
 import Highcharts from 'highcharts/highstock';
+
+const style = {
+    marginTop: 20,
+    marginBottom: 20
+};
 
 class Chart extends React.Component {
     constructor(props) {
@@ -32,7 +38,9 @@ class Chart extends React.Component {
 
     render() {
         return (
-          <div id="stock-chart"></div>
+            <Paper style={style} zDepth={4}>
+                <div id="stock-chart"></div>
+            </Paper>
         );
     }
 }

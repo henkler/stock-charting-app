@@ -7,7 +7,7 @@ import StockList from '../components/stockList.jsx';
 const composer = (props, onData) => {
   if (Meteor.subscribe('selectedStocks').ready()) {
     const stocks = Stocks.find().fetch();
-    onData(null, { stocks });
+    onData(null, { stocks, props });
   }
 };
 

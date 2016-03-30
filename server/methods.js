@@ -8,7 +8,7 @@ function getQuandlStockData(stock, callback) {
   const options = {
     auth_token: Meteor.settings.quandl.api_key,
     api_version: 3
-  }
+  };
 
   const today = moment().format('YYYY/MM/DD');
   const oneYearAgo = moment().subtract(1, 'years').subtract(1, 'weeks').format('YYYY/MM/DD');
@@ -36,7 +36,7 @@ Meteor.methods({
     }
   },
 
-  removeStock(tickerSymbol) {
+  deleteStock(tickerSymbol) {
     Stocks.remove(tickerSymbol);
   },
 

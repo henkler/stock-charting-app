@@ -20,8 +20,13 @@ class App extends React.Component {
             this.setState({ stockData: result });
         });
     }
-    handleButtonClick() {
+    handleAddStockClick() {
         Meteor.call('addStock', this.state.stockInput);
+        this.setState({ stockInput: null });
+        this.loadStockData();
+    }
+    handleDeleteStockClick(stockId) {
+        Meteor.call('deleteStock', stockId);
         this.loadStockData();
     }
     stockInputChanged(event) {
@@ -41,9 +46,12 @@ class App extends React.Component {
                     zDepth={4}
                 />
                 <Chart stockData={this.state.stockData} />
-                <StockList />
-                <input type="text" value={this.state.stockInput} onChange={ event => this.stockInputChanged(event) } />
-                <button type="button" onClick={ event => this.handleButtonClick() }>Add Stock</button>
+                <StockList
+                    handleAddStockClick={this.handleAddStockClick.bind(this)}
+                    handleDeleteStockClick={this.handleDeleteStockClick.bind(this)}
+                    stockInput={this.state.stockInput}
+                    stockInputChanged={this.stockInputChanged.bind(this)}
+                    />
             </div>
         );
     }
